@@ -33,8 +33,8 @@ const receiverAddress = ref<string>('')
     </template>
     <template v-else>
       <p my-12 text-center text-red font-bold>
-        Sorry, Only support Token Packet mobile app or TronLink browser extension.
-        Please use the Token Packet mobile app to open it or install TronLink extension.
+        Sorry, Only support Token Packet mobile app.
+        Please use the Token Packet mobile app to open it.
       </p>
     </template>
 
