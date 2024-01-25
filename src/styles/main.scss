@@ -1,0 +1,88 @@
+/* @import './other.css'; */
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html.dark {
+  background: #121212;
+  color-scheme: dark;
+}
+
+#nprogress {
+  pointer-events: none;
+
+  .bar {
+    background: rgb(13, 148, 136);
+    opacity: 0.75;
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+  }
+}
+
+.text-gradient {
+  display: inline;
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+button {
+  color: white;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  justify-content: center;
+  background: var(--gradient) !important;
+}
+
+button.primary {
+  padding: 0.25rem 1rem;
+  background: var(--gradient);
+  color: rgb(233, 233, 233);
+  transition: all 0.4s ease-out;
+  clip-path: polygon(
+    0 8px,
+    /* Start from the upper left corner */ 8px 0,
+    /* Upper left gap */ 100% 0,
+    /* Top side */ 100% 0,
+    /* Upper right corner */ 100% calc(100% - 8px),
+    /* Right side */ calc(100% - 8px) 100%,
+    /* Lower right gap */ 0 100%,
+    /* Bottom side */ 0 100% /* Left side */
+  );
+
+  &:hover {
+    clip-path: polygon(
+      0 4px,
+      /* Start from the upper left corner */ 4px 0,
+      /* Upper left gap */ 100% 0,
+      /* Top side */ 100% 0,
+      /* Upper right corner */ 100% calc(100% - 4px),
+      /* Right side */ calc(100% - 4px) 100%,
+      /* Lower right gap */ 0 100%,
+      /* Bottom side */ 0 100% /* Left side */
+    );
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.divider {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 197, 222, 1) 0%,
+    rgba(0, 20, 87, 1) 100%
+  );
+}
+
+@import url(primevue/resources/themes/lara-light-blue/theme.css);
+@import url(./datatable.scss);

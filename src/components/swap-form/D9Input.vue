@@ -1,0 +1,27 @@
+<script setup lang="ts">
+const amount = defineModel<string>()
+</script>
+
+<template>
+  <div row rounded-xl bg-gray-1 p-3 dark:bg-gray-8>
+    <div relative w-14 shrink-0 p-1>
+      <div h-full w-full rounded-full p-1.5 class="bg-[rgb(0,90,223)]">
+        <img h-full w-full rounded-full src="/imgs/d9.png" alt="">
+      </div>
+      <img absolute bottom-0 right-0 w-6 src="/imgs/usdt.png" alt="">
+    </div>
+    <div ml-4 col grow items-end justify-between>
+      <p text-sm text-gray-5 dark:text-gray-4>
+        Balance: 123,321.00
+      </p>
+      <InputText
+        v-model="amount" name="receiveAmount" placeholder="Input amount" type="number" w-full bg-transparent text-end text-xl font-bold
+        shadow-none
+      />
+    </div>
+  </div>
+</template>
+
+<style scoped>
+
+</style>

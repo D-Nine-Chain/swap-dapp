@@ -1,0 +1,40 @@
+.p-datatable {
+  $header-padding-x: 0rem;
+  $header-padding-y: 0rem;
+  $header-content-padding: 0.5rem 1rem;
+
+  .p-datatable {
+    @apply shadow;
+  }
+
+  .p-datatable-thead > tr > th {
+    background: transparent;
+    padding-top: #{$header-padding-y};
+    padding-bottom: #{$header-padding-y};
+    padding-left: 0;
+    padding-right: 0;
+
+    .p-column-header-content {
+      padding: #{$header-content-padding};
+      background: rgb(233, 233, 233);
+      @apply shadow;
+    }
+
+    // background: rgb(233, 233, 233);
+    &:first-child {
+      padding-inline-start: #{$header-padding-x};
+
+      .p-column-header-content {
+        @apply rounded-l-full;
+      }
+    }
+
+    &:last-child {
+      padding-inline-end: #{$header-padding-x};
+
+      .p-column-header-content {
+        @apply rounded-r-full;
+      }
+    }
+  }
+}
