@@ -9,13 +9,17 @@ declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('primevue/button')['default']
     InputText: typeof import('primevue/inputtext')['default']
+    ProgressBar: typeof import('primevue/progressbar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Skeleton: typeof import('primevue/skeleton')['default']
     SwapForm: typeof import('./components/swap-form/index.vue')['default']
     SwapFormAccountInput: typeof import('./components/swap-form/AccountInput.vue')['default']
     SwapFormConnectWallet: typeof import('./components/swap-form/ConnectWallet.vue')['default']
     SwapFormD9Input: typeof import('./components/swap-form/D9Input.vue')['default']
+    SwapFormExchangeInfo: typeof import('./components/swap-form/ExchangeInfo.vue')['default']
     SwapFormReceiverInput: typeof import('./components/swap-form/ReceiverInput.vue')['default']
+    SwapFormSwapInfo: typeof import('./components/swap-form/SwapInfo.vue')['default']
     SwapFormTronInput: typeof import('./components/swap-form/TronInput.vue')['default']
   }
 }

@@ -9,7 +9,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 
-// import VueDevTools from 'vite-plugin-vue-devtools'
+import VueDevTools from 'vite-plugin-vue-devtools'
 import Unocss from 'unocss/vite'
 import WebfontDownload from 'vite-plugin-webfont-dl'
 import VueRouter from 'unplugin-vue-router/vite'
@@ -47,10 +47,12 @@ export default defineConfig({
         'vue-i18n',
         '@vueuse/head',
         '@vueuse/core',
+        'rxjs',
         VueRouterAutoImports,
         {
           // add any other imports you were relying on
           'vue-router/auto': ['useLink'],
+          '@vueuse/rxjs': ['useObservable'],
         },
       ],
       dts: 'src/auto-imports.d.ts',
@@ -91,7 +93,7 @@ export default defineConfig({
     WebfontDownload(),
 
     // https://github.com/webfansplz/vite-plugin-vue-devtools
-    // VueDevTools(),
+    VueDevTools(),
   ],
 
   // https://github.com/vitest-dev/vitest

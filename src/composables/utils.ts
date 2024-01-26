@@ -7,7 +7,7 @@ export function truncateAddress(address: MaybeRefOrGetter<string | null | undefi
     if (walletAddress.length < startChars + endChars + 3)
       return walletAddress
 
-    const prefix = walletAddress.slice(2, startChars)
+    const prefix = walletAddress.slice(0, startChars)
     const suffix = walletAddress.slice(-endChars)
 
     return `${prefix}...${suffix}`

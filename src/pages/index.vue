@@ -11,12 +11,15 @@ useHead({
 </script>
 
 <template>
-  <div class="wrapper" relative sm="h-100vh w-100vw flex align-central">
-    <div absolute inset-0 z-0 backdrop-blur-lg lt-sm:hidden class="dark:bg-[rgba(0,0,0,0.8)]" />
+  <div class="wrapper" min-h-100vh w-100vw flex align-central>
+    <div fixed inset-0 z-0 sm:backdrop-blur-lg class="dark:bg-[rgba(0,0,0,0.8)]" />
 
-    <img src="/imgs/big-logo.png" absolute bottom-10 max-w-16rem lt-sm:hidden>
+    <img src="/imgs/big-logo.png" fixed bottom-10 max-w-16rem lt-sm:hidden>
 
-    <SwapForm lt-sm="h-full rounded-0 b-0" z-1 min-h-15rem w-full sm:max-w-30rem sm:min-w-25rem />
+    <SwapForm
+      lt-sm="rounded-0 b-0" z-10 h-auto w-full place-self-stretch
+      sm="max-w-30rem min-w-25rem place-self-center h-full"
+    />
   </div>
 </template>
 

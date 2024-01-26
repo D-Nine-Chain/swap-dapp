@@ -17,6 +17,9 @@ dependencies:
   '@vueuse/head':
     specifier: ^2.0.0
     version: 2.0.0(vue@3.4.15)
+  '@vueuse/rxjs':
+    specifier: ^10.7.2
+    version: 10.7.2(rxjs@7.8.1)(vue@3.4.15)
   date-fns:
     specifier: ^3.2.0
     version: 3.2.0
@@ -29,6 +32,9 @@ dependencies:
   primevue:
     specifier: ^3.46.0
     version: 3.46.0(vue@3.4.15)
+  rxjs:
+    specifier: ^7.8.1
+    version: 7.8.1
   sass:
     specifier: ^1.70.0
     version: 1.70.0
@@ -2767,6 +2773,19 @@ packages:
 
   /@vueuse/metadata@10.7.2:
     resolution: {integrity: sha512-kCWPb4J2KGrwLtn1eJwaJD742u1k5h6v/St5wFe8Quih90+k2a0JP8BS4Zp34XUuJqS2AxFYMb1wjUL8HfhWsQ==}
+
+  /@vueuse/rxjs@10.7.2(rxjs@7.8.1)(vue@3.4.15):
+    resolution: {integrity: sha512-UC7xyUS5SzKFkpdayjL5hr+PkRJ5juejaUO6C4n9/FX2/BFayijPEJT048wsrwVuA6lZnhzl1YNPWRTR/G+/uA==}
+    peerDependencies:
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@vueuse/shared': 10.7.2(vue@3.4.15)
+      rxjs: 7.8.1
+      vue-demi: 0.14.6(vue@3.4.15)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
 
   /@vueuse/shared@10.7.2(vue@3.4.15):
     resolution: {integrity: sha512-qFbXoxS44pi2FkgFjPvF4h7c9oMDutpyBdcJdMYIMg9XyXli2meFMuaKn+UMgsClo//Th6+beeCgqweT/79BVA==}
@@ -7205,7 +7224,6 @@ packages:
     resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
     dependencies:
       tslib: 2.6.2
-    dev: true
 
   /safe-buffer@5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
@@ -7818,7 +7836,6 @@ packages:
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
-    dev: true
 
   /tuf-js@2.1.0:
     resolution: {integrity: sha512-eD7YPPjVlMzdggrOeE8zwoegUaG/rt6Bt3jwoQPunRiNVzgcCE009UDFJKJjG+Gk9wFu6W/Vi+P5d/5QpdD9jA==}

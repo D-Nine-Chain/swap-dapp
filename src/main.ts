@@ -1,6 +1,7 @@
 import { ViteSSG } from 'vite-ssg'
 import { setupLayouts } from 'virtual:generated-layouts'
 import PrimeVue from 'primevue/config'
+import ToastService from 'primevue/toastservice'
 
 // import Previewer from 'virtual:vue-component-preview'
 import { routes } from 'vue-router/auto/routes'
@@ -24,5 +25,6 @@ export const createApp = ViteSSG(
     // ctx.app.use(Previewer)
     ctx.app.use(PrimeVue, {
     })
+    ctx.app.use(ToastService)
   },
 )

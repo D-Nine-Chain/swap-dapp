@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import Skeleton from 'primevue/skeleton'
+
+const { balance } = useWalletStoreRefs()
 const amount = defineModel<string>()
 </script>
 
@@ -10,7 +13,11 @@ const amount = defineModel<string>()
     </div>
     <div ml-4 col grow items-end justify-between>
       <p text-sm text-gray-5 dark:text-gray-4>
-        Balance: 123,321.00
+        Balance:
+        <Skeleton v-if="!balance" class="bg-[rgba(100,100,100,0.5)]" width="3rem" inline-block vertical-text-bottom />
+        <template v-else>
+          {{ balance.toFixed(6) }}
+        </template>
       </p>
       <InputText
         v-model="amount" name="sendAmount" placeholder="Input amount" type="number" w-full bg-transparent text-end text-xl font-bold

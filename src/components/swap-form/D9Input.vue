@@ -12,7 +12,7 @@ const amount = defineModel<string>()
     </div>
     <div ml-4 col grow items-end justify-between>
       <p text-sm text-gray-5 dark:text-gray-4>
-        Balance: 123,321.00
+        <!-- Balance: 123,321.00 -->
       </p>
       <InputText
         v-model="amount" name="receiveAmount" placeholder="Input amount" type="number" w-full bg-transparent text-end text-xl font-bold

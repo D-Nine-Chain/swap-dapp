@@ -15,7 +15,7 @@ const truncated = truncateAddress(address)
       font-bold
       shadow-none
     >
-      {{ truncated }}
+      {{ truncated || '-' }}
     </p>
   </div>
 </template>

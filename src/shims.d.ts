@@ -1,5 +1,4 @@
 declare interface Window {
-  // extend the window
   tronWeb?: any
 }
 
@@ -17,6 +16,9 @@ declare module 'tp-js-sdk' {
     msg: string
   }>
 
+  interface Wallet { name: string, address: string, blockchain: string }
+
   export async function getAppInfo(): Result<{ name: string }>
-  export async function getCurrentWallet(): Result<{ name: string, address: string, blockchain: string }>
+  export async function getCurrentWallet(): Result<Wallet>
+  export async function getWallet(params: { walletTypes: ('eth' | 'btc' | 'tron') [], switch: boolean }): Result<Wallet>
 }
