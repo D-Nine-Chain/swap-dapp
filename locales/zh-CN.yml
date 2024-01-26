@@ -1,11 +1,20 @@
-button:
-  about: 关于
-  back: 返回
-  go: 确定
-  home: 首页
-  toggle_dark: 切换深色模式
-  toggle_langs: 切换语言
-intro:
-  hi: 你好，{name}
-  whats-your-name: 输入你的名字
-not-found: 未找到页面
+action:
+  submit: 提交
+common:
+  balance: '余额: {balance}'
+  failed: '操作失败: {error}'
+swap-form:
+  current-wallet-address: 你的钱包地址
+  placeholder:
+    amount-received: 将收到数量
+    input-amount: 请输入数量
+    input-receiver: 请输入接收者地址
+  receiver: 接收者
+  title: TRON D9 跨链桥
+  toast:
+    approval: Approval
+    transaction: Transaction
+    transaction-successful: 交易成功!
+  unsupported: >-
+    Sorry, currently only TokenPocket APP or browsers with the TronLink extension installed are supported.
+    Please use it in a supported environment.

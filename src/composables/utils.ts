@@ -1,4 +1,5 @@
 import type { MaybeRefOrGetter } from '@vueuse/core'
+import { availableLocales, loadLanguageAsync } from '~/modules/i18n'
 
 export function truncateAddress(address: MaybeRefOrGetter<string | null | undefined>) {
   function truncateWalletAddress(walletAddress: string | null | undefined, startChars = 8, endChars = 4): string {
@@ -13,4 +14,27 @@ export function truncateAddress(address: MaybeRefOrGetter<string | null | undefi
     return `${prefix}...${suffix}`
   }
   return computed(() => truncateWalletAddress(toValue(address)))
+}
+
+export async function setupI18n() {
+  const { locale } = useI18n()
+  const userLocale = navigator.language
+  const storagedLocale = useLocalStorage('locale-user-selected', userLocale)
+  console.info(
+    'locale',
+    locale,
+    'user locale',
+    userLocale,
+    'storaged locale',
+    storagedLocale,
+    'available locales',
+    availableLocales,
+  )
+  if (!locale.value) {
+    if (availableLocales.includes(userLocale)) { await loadLanguageAsync(userLocale) }
+    else {
+      await loadLanguageAsync('en')
+      storagedLocale.value = 'en'
+    }
+  }
 }

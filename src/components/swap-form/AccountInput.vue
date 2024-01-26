@@ -5,7 +5,7 @@ const truncated = truncateAddress(address)
 
 <template>
   <div rounded-xl bg-gray-1 p-4 dark:bg-gray-8>
-    <label for="wallet-address" text-gray-5 dark:text-gray-4>Your wallet address</label>
+    <label for="wallet-address" text-gray-5 dark:text-gray-4>{{ $t('swap-form.current-wallet-address') }}</label>
     <p
       w-full
       overflow-hidden

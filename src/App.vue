@@ -20,7 +20,7 @@ useHead({
     },
   ],
 })
-
+setupI18n()
 useWalletStore()
 </script>
 

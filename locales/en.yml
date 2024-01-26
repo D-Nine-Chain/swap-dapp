@@ -1,56 +1,20 @@
-button:
-  about: About
-  back: Back
-  go: GO
-  home: Home
-  toggle_dark: Toggle dark mode
-  toggle_langs: Change languages
-intro:
-  hi: Hi, {name}!
-  whats-your-name: What's your name?
-not-found: Not found
-page:
-  home:
-    community:
-      t: Community Background
-    header:
-      about: ABOUT D9
-      download: Download
-      open-app: Open App
-      p: >-
-        D9 community is committed to helping global business institutions
-        reconstruct new business rules through blockchain technology, break the
-        traditional capital business monopoly, realize the implementation of a
-        more diversified and win-win business model with consumers and their
-        supply chain partners, and form a new platform for community-based
-        organization units across regions, across time and space. So that people
-        around the world can achieve wealth equality on the D9 platform, and
-        build a wealth community through win-win cooperation.
-    highlight:
-      item1:
-        p: >-
-          In many traditional PoS systems, long-term token holding and
-          verification may lead to the concentration of interests and the
-          vulnerability of the network. DPoC needs to reduce the number of
-          current token holdings to obtain greater accounting power, which
-          reduces the risk of oligopoly control and increases the degree of
-          decentralization of the network.
-        t: Enhanced Decentralization
-      item2:
-        p: >-
-          In many PoS systems, new token reward mechanisms are often adopted in
-          order to encourage token holders to participate in verification. This
-          can lead to inflation, thus diluting the value of existing token
-          holders. DPoC limits the issuance of new tokens through a burning
-          mechanism, helping to control inflation and maintain the value of the
-          tokens, while also ensuring the long-term sustainability and stability
-          of the network.
-        t: Protecting the Value of Token Holders
-      item3:
-        p: >-
-          PoS itself has a certain degree of security, and DPoC further improves
-          the security standard of the network through its combustion strategy.
-          The process of burning tokens actually increases the cost of malicious
-          behavior, making any attack or fraud more expensive.
-        t: Enhanced Security
-      t: Highlight of Network Technology
+action:
+  submit: Submit
+common:
+  balance: 'Balance: {balance}'
+  failed: 'Operation failed: {error}'
+swap-form:
+  current-wallet-address: Your wallet address
+  placeholder:
+    amount-received: Amount received
+    input-amount: Input amount
+    input-receiver: Input receiver address
+  receiver: Receiver
+  title: CROSSCHAIN BRIDGE
+  toast:
+    approval: Approval
+    transaction: Transaction
+    transaction-successful: Transaction successful!
+  unsupported: >-
+    Sorry, Only support Token Packet mobile app. Please use the Token Packet
+    mobile app to open it.

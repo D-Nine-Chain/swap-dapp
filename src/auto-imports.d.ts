@@ -109,6 +109,7 @@ declare global {
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
   const retry: typeof import('rxjs')['retry']
   const retryWhen: typeof import('rxjs')['retryWhen']
+  const setupI18n: typeof import('./composables/utils')['setupI18n']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -448,6 +449,7 @@ declare module 'vue' {
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
     readonly retry: UnwrapRef<typeof import('rxjs')['retry']>
     readonly retryWhen: UnwrapRef<typeof import('rxjs')['retryWhen']>
+    readonly setupI18n: UnwrapRef<typeof import('./composables/utils')['setupI18n']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
@@ -774,6 +776,7 @@ declare module '@vue/runtime-core' {
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
     readonly retry: UnwrapRef<typeof import('rxjs')['retry']>
     readonly retryWhen: UnwrapRef<typeof import('rxjs')['retryWhen']>
+    readonly setupI18n: UnwrapRef<typeof import('./composables/utils')['setupI18n']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>

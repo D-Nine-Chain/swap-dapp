@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const amount = defineModel<string>()
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -15,7 +17,10 @@ const amount = defineModel<string>()
         <!-- Balance: 123,321.00 -->
       </p>
       <InputText
-        v-model="amount" name="receiveAmount" placeholder="Input amount" type="number" w-full bg-transparent text-end text-xl font-bold
+        v-model="amount"
+        readonly name="receiveAmount"
+        :placeholder="t('swap-form.placeholder.amount-received')"
+        type="number" w-full bg-transparent text-end text-xl font-bold
         shadow-none
       />
     </div>

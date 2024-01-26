@@ -4,6 +4,7 @@ import Toast from 'primevue/toast'
 
 const toastCtrl = useToast()
 
+const { t } = useI18n()
 const { isTronWeb, approveToSwapContract } = useWalletStore()
 const amount = ref<string>('')
 const receiverAddress = ref<string>('')
@@ -19,20 +20,25 @@ const { execute: submit, isLoading: crosschainLoading, error } = useCrossChain(r
 watch(approveError, (_error) => {
   if (!_error)
     return
-  toastCtrl.add({ severity: 'error', summary: 'Approval', detail: `Failed. ${_error}` })
+  toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.approval'), detail: t('common.failed', { error: _error }) })
 })
 watch(error, (_error) => {
   if (!_error)
     return
   const { error } = _error as { error: string, success: boolean }
-  toastCtrl.add({ severity: 'error', summary: error, life: 5000 })
+  toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.transaction'), detail: error, life: 5000 })
 })
 
 async function handleSubmit() {
   await execute()
   if (approveError.value)
     return
+
   await submit()
+  if (error.value)
+    return
+
+  toastCtrl.add({ severity: 'success', summary: t('swap-form.toast.transaction'), detail: t('swap-form.toast.transaction-successful') })
 }
 </script>
 
@@ -40,8 +46,8 @@ async function handleSubmit() {
   <form
     col b-1 rounded-2xl bg-white p-8 shadow-sm dark:b-gray-7 dark:bg-gray-9 sm:p-12
   >
-    <h1 text-center text-3xl font-bold>
-      CROSSCHAIN BRIDGE
+    <h1 text-center text-3xl font-bold tracking-wide>
+      {{ $t('swap-form.title') }}
     </h1>
     <Toast />
 
@@ -57,14 +63,13 @@ async function handleSubmit() {
         :disabled="!amount"
         :loading="isLoading || crosschainLoading" @click="handleSubmit"
       >
-        Submit
+        {{ $t('action.submit') }}
       </Button>
       <ProgressBar v-show="isLoading || crosschainLoading" class="bg-[rgba(100,100,100,0.4)]" mode="indeterminate" style="height: 6px" />
     </template>
     <template v-else>
-      <p my-12 text-center text-red font-bold>
-        Sorry, Only support Token Packet mobile app.
-        Please use the Token Packet mobile app to open it.
+      <p my-12 text-center text-red font-bold prose>
+        {{ $t('swap-form.unsupported') }}
       </p>
     </template>
 
