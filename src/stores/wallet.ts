@@ -6,7 +6,7 @@ import { combineLatest, distinctUntilChanged, firstValueFrom, shareReplay, timer
 export const useWalletStore = defineStore('web3-wallet', () => {
   const tronWeb = window.tronWeb
 
-  const usdtContract$: Observable<any> = from(tronWeb.contract().at(import.meta.env.VITE_APP_USDT_CONTRACT_ADDRESS)).pipe(
+  const usdtContract$: Observable<any> = (tronWeb ? from(tronWeb.contract().at(import.meta.env.VITE_APP_USDT_CONTRACT_ADDRESS)) : of()).pipe(
     shareReplay(1),
   )
   const address$ = timer(0, 1000).pipe(
@@ -17,6 +17,7 @@ export const useWalletStore = defineStore('web3-wallet', () => {
   const balance$ = combineLatest([address$, timer(0, 2000)]).pipe(
     switchMap(([addr]) => {
       return from(usdtContract$).pipe(
+        filter(contract => !!contract),
         switchMap(contract => from(contract.balanceOf(addr).call())),
         map(result => tronWeb.toBigNumber(result)),
         map(bn => bn.dividedBy(10 ** 6).toNumber() as number),

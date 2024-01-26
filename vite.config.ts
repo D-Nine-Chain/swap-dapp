@@ -106,6 +106,7 @@ export default defineConfig({
   // ssg for main app
   ssgOptions: {
     script: 'async',
+    mock: true,
     formatting: 'minify',
     crittersOptions: {
       reduceInlineStyles: false,

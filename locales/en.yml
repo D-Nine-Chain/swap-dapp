@@ -16,5 +16,5 @@ swap-form:
     transaction: Transaction
     transaction-successful: Transaction successful!
   unsupported: >-
-    Sorry, Only support Token Packet mobile app. Please use the Token Packet
-    mobile app to open it.
+    抱歉，目前仅支持TokenPocket APP或安装了TronLink扩展的浏览器。
+    请在受支持的环境中使用它。
