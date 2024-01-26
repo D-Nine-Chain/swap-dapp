@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
+import { fromEvent } from '@vueuse/rxjs'
 
 const toastCtrl = useToast()
 
@@ -51,27 +52,25 @@ async function handleSubmit() {
     </h1>
     <Toast />
 
-    <template v-if="isTronWeb">
-      <SwapFormAccountInput mt-10 />
-      <SwapFormReceiverInput v-model="receiverAddress" mt-8 />
-      <SwapFormTronInput v-model="amount" mt-8 />
-      <SwapFormD9Input v-model="amount" mt-8 />
-      <!-- <SwapFormSwapInfo mt-8 /> -->
+    <SwapFormAccountInput mt-10 />
+    <SwapFormReceiverInput v-model="receiverAddress" mt-8 />
+    <SwapFormTronInput v-model="amount" mt-8 />
+    <SwapFormD9Input v-model="amount" mt-8 />
+    <!-- <SwapFormSwapInfo mt-8 /> -->
 
-      <Button
-        mt-10 w-full text-center
-        :disabled="!amount"
-        :loading="isLoading || crosschainLoading" @click="handleSubmit"
-      >
-        {{ $t('action.submit') }}
-      </Button>
-      <ProgressBar v-show="isLoading || crosschainLoading" class="bg-[rgba(100,100,100,0.4)]" mode="indeterminate" style="height: 6px" />
-    </template>
-    <template v-else>
-      <p my-12 text-center text-red font-bold prose>
-        {{ $t('swap-form.unsupported') }}
-      </p>
-    </template>
+    <Button
+      v-if="isTronWeb"
+      mt-10 w-full text-center
+      :disabled="!amount"
+      :loading="isLoading || crosschainLoading" @click="handleSubmit"
+    >
+      {{ $t('action.submit') }}
+    </Button>
+
+    <p v-else mt-1rem text-center text-red font-bold prose>
+      {{ $t('swap-form.unsupported') }}
+    </p>
+    <ProgressBar v-show="isLoading || crosschainLoading" class="bg-[rgba(100,100,100,0.4)]" mode="indeterminate" style="height: 6px" />
 
     <div grow />
     <img src="/imgs/big-logo.png" max-w-16rem self-center py-8 sm:hidden>
