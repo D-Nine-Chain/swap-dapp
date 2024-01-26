@@ -5,6 +5,7 @@ import { combineLatest, distinctUntilChanged, firstValueFrom, fromEvent, shareRe
 
 export const useWalletStore = defineStore('web3-wallet', () => {
   let tronWeb: any
+  // optimization: window.tronWeb is sometimes not available from the beginning...
   const tronWeb$ = timer(0, 500).pipe(
     map(() => window.tronWeb),
     distinctUntilChanged(),
@@ -12,8 +13,9 @@ export const useWalletStore = defineStore('web3-wallet', () => {
     timeout(6000),
     catchError(() => of(undefined)),
     tap((tw) => {
-      tronWeb = tw
+      tronWeb ??= tw
     }),
+    map(() => tronWeb),
     shareReplay(1),
   )
 

@@ -21,7 +21,7 @@ const { execute: submit, isLoading: crosschainLoading, error } = useCrossChain(r
 watch(approveError, (_error) => {
   if (!_error)
     return
-  toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.approval'), detail: t('common.failed', { error: _error }) })
+  toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.approval'), life: 3000, detail: t('common.failed', { error: _error }) })
 })
 watch(error, (_error) => {
   if (!_error)
@@ -39,7 +39,7 @@ async function handleSubmit() {
   if (error.value)
     return
 
-  toastCtrl.add({ severity: 'success', summary: t('swap-form.toast.transaction'), detail: t('swap-form.toast.transaction-successful') })
+  toastCtrl.add({ severity: 'success', summary: t('swap-form.toast.transaction'), life: 3000, detail: t('swap-form.toast.transaction-successful') })
 }
 </script>
 
