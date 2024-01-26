@@ -8,9 +8,9 @@ export const useWalletStore = defineStore('web3-wallet', () => {
   const tronWeb$ = timer(0, 500).pipe(
     map(() => window.tronWeb),
     distinctUntilChanged(),
+    takeWhile(tw => !!tw),
     timeout(6000),
     catchError(() => of(undefined)),
-    takeWhile(tw => !!tw),
     tap((tw) => {
       tronWeb = tw
     }),
