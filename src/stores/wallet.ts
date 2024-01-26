@@ -1,16 +1,29 @@
 import tp from 'tp-js-sdk'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import type { Observable } from 'rxjs'
-import { combineLatest, distinctUntilChanged, firstValueFrom, shareReplay, timer } from 'rxjs'
+import { combineLatest, distinctUntilChanged, firstValueFrom, fromEvent, shareReplay, takeWhile, timer } from 'rxjs'
 
 export const useWalletStore = defineStore('web3-wallet', () => {
-  const tronWeb = window.tronWeb
-
-  const usdtContract$: Observable<any> = (tronWeb ? from(tronWeb.contract().at(import.meta.env.VITE_APP_USDT_CONTRACT_ADDRESS)) : of()).pipe(
+  let tronWeb: any
+  const tronWeb$ = timer(0, 500).pipe(
+    map(() => window.tronWeb),
+    distinctUntilChanged(),
+    timeout(6000),
+    catchError(() => of(undefined)),
+    takeWhile(tw => !!tw),
+    tap((tw) => {
+      tronWeb = tw
+    }),
     shareReplay(1),
   )
-  const address$ = timer(0, 1000).pipe(
-    map(() => tronWeb?.defaultAddress?.base58),
+
+  const usdtContract$: Observable<any> = tronWeb$.pipe(
+    switchMap(tron => from(tron.contract().at(import.meta.env.VITE_APP_USDT_CONTRACT_ADDRESS))),
+    shareReplay(1),
+  )
+  const address$ = combineLatest([tronWeb$, timer(0, 1000)]).pipe(
+    map(([tronWeb]) => tronWeb?.defaultAddress?.base58),
+    filter(value => !!value),
     distinctUntilChanged(),
     shareReplay(1),
   )
@@ -26,7 +39,7 @@ export const useWalletStore = defineStore('web3-wallet', () => {
     distinctUntilChanged(),
     shareReplay(1),
   )
-  const isTronWeb = ref(typeof tronWeb === 'object')
+  const isTronWeb = useObservable(tronWeb$.pipe(map(tw => !!tw)))
   const address = useObservable(address$)
   const balance = useObservable(balance$)
 
