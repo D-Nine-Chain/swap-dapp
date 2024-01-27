@@ -21,6 +21,7 @@
     "@vueuse/core": "^10.7.2",
     "@vueuse/head": "^2.0.0",
     "@vueuse/rxjs": "^10.7.2",
+    "bignumber.js": "^9.1.2",
     "date-fns": "^3.2.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",

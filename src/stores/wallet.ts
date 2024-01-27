@@ -2,6 +2,7 @@ import tp from 'tp-js-sdk'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import type { Observable } from 'rxjs'
 import { combineLatest, distinctUntilChanged, firstValueFrom, fromEvent, shareReplay, takeWhile, timer } from 'rxjs'
+import BigNumber from 'bignumber.js'
 
 export const useWalletStore = defineStore('web3-wallet', () => {
   let tronWeb: any
@@ -34,8 +35,8 @@ export const useWalletStore = defineStore('web3-wallet', () => {
       return from(usdtContract$).pipe(
         filter(contract => !!contract),
         switchMap(contract => from(contract.balanceOf(addr).call())),
-        map(result => tronWeb.toBigNumber(result)),
-        map(bn => bn.dividedBy(10 ** 6).toNumber() as number),
+        map(result => BigNumber((result as any)?.toString() ?? 0)),
+        map(bn => bn.dividedBy(BigNumber(10).pow(6)).toNumber() as number),
       )
     }),
     distinctUntilChanged(),
@@ -70,16 +71,16 @@ export const useWalletStore = defineStore('web3-wallet', () => {
     async approveToSwapContract(amount: number | string) {
       const usdtContract = await firstValueFrom(usdtContract$)
       const allowance = await usdtContract.allowance(address.value, import.meta.env.VITE_APP_CROSSCHAIN_CONTRACT_ADDRESS).call()
-      const allowanceSun = tronWeb.toBigNumber(allowance[0])
-      const amountSun = tronWeb.BigNumber(amount).multipliedBy(10 ** 6)
+
+      const allowanceSun = BigNumber(allowance[0].toString())
+      const amountSun = BigNumber(amount).multipliedBy(BigNumber(10).pow(6))
 
       console.info('allowance', allowanceSun.toString(), amountSun.toString())
-      if (allowanceSun >= amountSun)
+      if (allowanceSun.gte(amountSun))
         return
-
       return await usdtContract.approve(
         import.meta.env.VITE_APP_CROSSCHAIN_CONTRACT_ADDRESS,
-        amountSun,
+        amountSun.toString(),
       ).send({
         feeLimit: tronWeb.toSun('400'),
       })
