@@ -8,7 +8,7 @@ const amount = defineModel<string>()
 
 <template>
   <div relative row rounded-xl bg-gray-1 p-3 dark:bg-gray-8>
-    <div relative w-14 shrink-0 p-1>
+    <div relative h-14 w-14 shrink-0 p-1>
       <img h-full w-full src="/imgs/tron.png" alt="">
       <img absolute bottom-0 right-0 w-6 src="/imgs/usdt.png" alt="">
     </div>
@@ -20,8 +20,11 @@ const amount = defineModel<string>()
         </template>
       </p>
       <InputText
-        v-model="amount" name="sendAmount" :placeholder="t('swap-form.placeholder.input-amount')" type="number" w-full bg-transparent text-end text-xl font-bold
-        shadow-none
+        v-model="amount"
+        name="sendAmount"
+        :placeholder="t('swap-form.placeholder.input-amount')" type="number" w-full bg-transparent text-end text-xl font-bold shadow-none
+        step="0.01"
+        @change="amount = Number(amount).toFixed(2)"
       />
     </div>
 

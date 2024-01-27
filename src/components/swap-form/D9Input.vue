@@ -6,7 +6,7 @@ const { t } = useI18n()
 
 <template>
   <div row rounded-xl bg-gray-1 p-3 dark:bg-gray-8>
-    <div relative w-14 shrink-0 p-1>
+    <div relative h-14 w-14 shrink-0 p-1>
       <div h-full w-full rounded-full p-1.5 class="bg-[rgb(0,90,223)]">
         <img h-full w-full rounded-full src="/imgs/d9.png" alt="">
       </div>

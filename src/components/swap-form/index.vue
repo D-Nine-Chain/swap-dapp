@@ -61,7 +61,7 @@ async function handleSubmit() {
     <Button
       v-if="isTronWeb"
       mt-10 w-full text-center
-      :disabled="!amount"
+      :disabled="!amount || !receiverAddress"
       :loading="isLoading || crosschainLoading" @click="handleSubmit"
     >
       {{ $t('action.submit') }}
