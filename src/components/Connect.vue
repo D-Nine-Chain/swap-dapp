@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { connect } = useTronWallet()
+
+const isTronLink = !!window.tronLink
 </script>
 
 <template>
@@ -10,7 +12,7 @@ const { connect } = useTronWallet()
       </p>
     </template>
     <template #content>
-      <p v-if="true" mt-1rem text-center text-red font-bold prose>
+      <p v-if="!isTronLink" text-center text-red font-bold prose>
         {{ $t('swap-form.unsupported') }}
       </p>
 
