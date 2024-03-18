@@ -30,6 +30,9 @@ export const useTronWallet = defineStore('tron-wallet', () => {
   }, 5000)
 
   onMounted(() => {
+    if (window.tronLink?.ready)
+      tronWeb.value = window.tronLink.tronWeb
+
     window.addEventListener('message', (event) => {
       const message = event.data.message
       if (message && message.action) {
