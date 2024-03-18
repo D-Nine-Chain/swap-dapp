@@ -5,7 +5,7 @@ const TronUSDTContractAddress = import.meta.env.VITE_APP_TRON_USDT_CONTRACT_ADDR
 let contractCache = new Map<string, any>()
 
 export const useTronWallet = defineStore('tron-wallet', () => {
-  const tronWeb = shallowRef(window.tronLink?.tronWeb ? window.tronLink?.tronWeb : undefined)
+  const tronWeb = shallowRef(window.tronWeb ? window.tronWeb : undefined)
   const connected = ref(false)
 
   const account = ref<string>()
@@ -30,9 +30,6 @@ export const useTronWallet = defineStore('tron-wallet', () => {
   }, 5000)
 
   onMounted(() => {
-    if (window.tronLink?.ready)
-      tronWeb.value = window.tronLink.tronWeb
-
     window.addEventListener('message', (event) => {
       const message = event.data.message
       if (message && message.action) {
@@ -51,10 +48,10 @@ export const useTronWallet = defineStore('tron-wallet', () => {
             !isTronNode.value && console.warn('not tron node')
             break
           case 'connect':
-            console.info('connect event', data, window.tronWeb, window.tronLink, window.tronLink.tronWeb)
+            console.info('connect event', data, window.tronWeb)
             connected.value = true
             if (!tronWeb.value)
-              tronWeb.value = window.tronLink.tronWeb
+              tronWeb.value = window.tronWeb
             break
           case 'disconnect':
             console.info('disconnect event', data)
@@ -66,23 +63,17 @@ export const useTronWallet = defineStore('tron-wallet', () => {
   })
 
   async function connect() {
-    if (window.tronLink.ready) {
-      tronWeb.value = window.tronLink.tronWeb
+    const res = await window.tronWeb.request({
+      method: 'tron_requestAccounts',
+      params: {
+        websiteName: 'D9 Network Cross Chain',
+      },
+    })
+    if (res.code === 200) {
+      tronWeb.value = window.tronWeb
       return true
     }
-    else {
-      const res = await window.tronLink.request({
-        method: 'tron_requestAccounts',
-        params: {
-          websiteName: 'D9 Network Cross Chain',
-        },
-      })
-      if (res.code === 200) {
-        tronWeb.value = window.tronLink.tronWeb
-        return true
-      }
-      return false
-    }
+    return false
   }
 
   async function approveContract(amount: number | string, contractAddress: string) {

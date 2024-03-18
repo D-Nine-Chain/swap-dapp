@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { connect } = useTronWallet()
 
-const isTronLink = !!window.tronLink
+const isTronLink = !!window.tronWeb
 </script>
 
 <template>

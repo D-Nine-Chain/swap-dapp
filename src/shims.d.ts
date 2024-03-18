@@ -1,6 +1,5 @@
 declare interface Window {
   tronWeb?: any
-  tronLink?: any
 }
 
 declare module '*.vue' {

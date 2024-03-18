@@ -11,7 +11,7 @@ swap-form:
     amount-received: 将收到数量
     input-amount: 请输入数量
     input-receiver: 请输入接收者地址
-  receiver: 接收者
+  receiver: 接收地址
   title: TRON D9 跨链桥
   toast:
     approval: Approval

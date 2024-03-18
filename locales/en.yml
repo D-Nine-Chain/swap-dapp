@@ -11,7 +11,7 @@ swap-form:
     amount-received: Amount received
     input-amount: Input amount
     input-receiver: Input receiver address
-  receiver: Receiver
+  receiver: Receive address
   title: CROSSCHAIN BRIDGE
   toast:
     approval: Approval

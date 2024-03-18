@@ -15,12 +15,10 @@ const { t } = useI18n()
     <div ml-4 col grow items-end justify-between>
       <p text-sm text-gray-5>
         <!-- Balance: 123,321.00 -->
-        <Transition name="fade">
-          <span v-if="amount">{{ t('swap-form.placeholder.amount-received') }}</span>
-        </Transition>
+        <span>{{ t('swap-form.placeholder.amount-received') }}</span>
       </p>
       <InputText
-        v-model="amount"
+        :value="amount ? amount : 0"
         readonly name="receiveAmount"
         :placeholder="t('swap-form.placeholder.amount-received')"
         type="number" w-full bg-transparent text-end text-xl font-bold
