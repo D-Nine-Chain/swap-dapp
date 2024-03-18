@@ -28,7 +28,7 @@ const amount = defineModel<string>()
         @change="amount = Number(amount).toFixed(2)"
         @blur="() => {
           if (Number(amount) === 0) amount = ''
-          else if (Number(amount) < 20000) amount = '20000'
+          else if (false && Number(amount) < 20000) amount = '20000'
         }"
       />
     </div>
