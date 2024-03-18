@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const { address } = useWalletStoreRefs()
-const truncated = truncateAddress(address)
+const { account } = useTronWallet()
+const truncated = truncateAddress(account)
 </script>
 
 <template>
-  <div rounded-xl bg-gray-1 p-4 dark:bg-gray-8>
-    <label for="wallet-address" text-gray-5 dark:text-gray-4>{{ $t('swap-form.current-wallet-address') }}</label>
+  <div rounded-xl bg-gray-1 p-4>
+    <label for="wallet-address" text-gray-5>{{ $t('swap-form.current-wallet-address') }}</label>
     <p
       w-full
       overflow-hidden

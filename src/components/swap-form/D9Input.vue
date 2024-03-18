@@ -5,7 +5,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <div row rounded-xl bg-gray-1 p-3 dark:bg-gray-8>
+  <div row rounded-xl bg-gray-1 p-3>
     <div relative h-14 w-14 shrink-0 p-1>
       <div h-full w-full rounded-full p-1.5 class="bg-[rgb(0,90,223)]">
         <img h-full w-full rounded-full src="/imgs/d9.png" alt="">
@@ -13,7 +13,7 @@ const { t } = useI18n()
       <img absolute bottom-0 right-0 w-6 src="/imgs/usdt.png" alt="">
     </div>
     <div ml-4 col grow items-end justify-between>
-      <p text-sm text-gray-5 dark:text-gray-4>
+      <p text-sm text-gray-5>
         <!-- Balance: 123,321.00 -->
       </p>
       <InputText

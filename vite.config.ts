@@ -22,18 +22,18 @@ export default defineConfig({
   },
 
   plugins: [
+    // https://github.com/posva/unplugin-vue-router
+    VueRouter({
+      extensions: ['.vue'],
+      dts: 'src/typed-router.d.ts',
+    }),
+
     VueMacros({
       plugins: {
         vue: Vue({
           include: [/\.vue$/],
         }),
       },
-    }),
-
-    // https://github.com/posva/unplugin-vue-router
-    VueRouter({
-      extensions: ['.vue', '.md'],
-      dts: 'src/typed-router.d.ts',
     }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
@@ -46,12 +46,11 @@ export default defineConfig({
         'vue-i18n',
         '@vueuse/head',
         '@vueuse/core',
-        'rxjs',
+        'pinia',
         VueRouterAutoImports,
         {
           // add any other imports you were relying on
           'vue-router/auto': ['useLink'],
-          '@vueuse/rxjs': ['useObservable'],
         },
       ],
       dts: 'src/auto-imports.d.ts',

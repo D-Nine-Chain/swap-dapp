@@ -3,6 +3,8 @@ action:
 common:
   balance: '余额: {balance}'
   failed: '操作失败: {error}'
+tron:
+  connect: 连接 TronWeb
 swap-form:
   current-wallet-address: 你的钱包地址
   placeholder:

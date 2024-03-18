@@ -4,7 +4,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <main text="center dark:gray-200" h-100dvh h-100svh col align-central>
+  <main text="center" h-100dvh h-100svh col align-central>
     <div text-25>
       <div i-carbon-warning inline-block text-gray />
     </div>

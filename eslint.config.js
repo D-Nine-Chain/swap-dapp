@@ -9,6 +9,7 @@ export default antfu(
       'no-console': 'off',
       'no-debugger': 'warn',
       'unused-imports/no-unused-vars': 'warn',
+      'no-case-declarations': 'off',
     },
   },
 )

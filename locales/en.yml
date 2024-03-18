@@ -3,6 +3,8 @@ action:
 common:
   balance: 'Balance: {balance}'
   failed: 'Operation failed: {error}'
+tron:
+  connect: Connect TronWeb
 swap-form:
   current-wallet-address: Your wallet address
   placeholder:

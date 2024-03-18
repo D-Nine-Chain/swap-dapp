@@ -1,88 +1,76 @@
-/* eslint-disable no-throw-literal */
 import type { MaybeRefOrGetter } from '@vueuse/core'
+import { FetchError, ofetch } from 'ofetch'
 
-function useTransactionID(address: MaybeRefOrGetter<string>) {
-  return useFetch<string>(() => `${import.meta.env.VITE_APP_CROSS_TRANSFER_ENDPOINT}transfer/id/next/${toValue(address)}`, {
-    immediate: false,
-    refetch: false,
-  }).get().text()
-}
-
-function useTransactionData(id: MaybeRefOrGetter<string | null>, toAddress: MaybeRefOrGetter<string>, amount: MaybeRefOrGetter<number>) {
-  const { address } = useWalletStoreRefs()
-  return computed(() => ({
-    transactionId: toValue(id),
-    toAddress: toValue(toAddress),
-    amount: toValue(amount),
-    fromAddress: toValue(address),
-    fromChain: 'TRON',
-    toChain: 'D9',
-  }))
-}
-
-function useCommitTransaction(data: MaybeRefOrGetter<ReturnType<typeof useTransactionData>>) {
-  return useFetch<any>(() => `${import.meta.env.VITE_APP_CROSS_TRANSFER_ENDPOINT}transfer/commit`, {
-    immediate: false,
-    refetch: false,
-  }).post(data).json()
-}
-
-function useFinishTransaction(data: MaybeRefOrGetter<ReturnType<typeof useTransactionData>>) {
-  return useFetch<any>(() => `${import.meta.env.VITE_APP_CROSS_TRANSFER_ENDPOINT}transfer/dispatch`, {
-    timeout: 60000,
-    immediate: false,
-    refetch: false,
-  }).post(data).json()
-}
+const D9CrossChainContractAddress = import.meta.env.VITE_APP_D9_CROSSCHAIN_CONTRACT_ADDRESS
 
 export function useCrossChain(
-  toAddress: MaybeRefOrGetter<string>,
-  amount: MaybeRefOrGetter<number>,
+  amount: MaybeRefOrGetter<string>,
+  receiverAddress: MaybeRefOrGetter<string>,
 ) {
-  const _toAddress = computed(() => {
-    const address = toValue(toAddress)
-    return address.length > 47 ? address.substring(2) : address
-  })
-  const { data, error: getIDError, execute: getID } = useTransactionID(_toAddress)
-  const body = useTransactionData(data, _toAddress, amount)
-  const commit = useCommitTransaction(body)
-  const dispatch = useFinishTransaction(body)
-  return useAsyncState(async () => {
-    await getID()
-    if (getIDError.value)
-      throw { error: 'get transaction id failed. please retry later' }
-    await commit.execute()
-    if (commit.error.value)
-      throw await streamToJSON(commit.response.value?.body)
-    console.info('commit result', commit.data.value)
+  const tron = useTronWallet()
 
-    await dispatch.execute()
-    if (dispatch.error.value)
-      throw await streamToJSON(dispatch.response.value?.body)
-    console.info('dispatch result', dispatch.data.value)
+  const error = ref<string>()
+  const isLoading = ref(false)
+  const data = ref()
 
-    return dispatch.data.value
-  }, undefined, {
-    immediate: false,
-  })
-}
+  async function execute() {
+    isLoading.value = true
+    error.value = undefined
+    try {
+      const baseURL = import.meta.env.VITE_APP_CROSS_TRANSFER_ENDPOINT
+      let receiver = toValue(receiverAddress)
+      if (receiver.length === 49 && receiver.startsWith('Dn'))
+        receiver = receiver.substring(2)
+      if (receiver.length !== 47)
+        throw new Error(`Invalid address: ${receiver}`)
 
-async function streamToJSON(stream: any) {
-  if (!stream)
-    return { error: '' }
-  const reader = stream.getReader()
-  const textDecoder = new TextDecoder()
-  let result = ''
+      await tron.approveContract(toValue(amount), D9CrossChainContractAddress)
 
-  async function read() {
-    const { done, value } = await reader.read()
+      const txId = await ofetch<string | object>(`transfer/id/next/${receiver}`, {
+        baseURL,
+      })
 
-    if (done)
-      return JSON.parse(result)
+      const form = {
+        transferId: txId,
+        toAddress: receiver,
+        amount: Number(toValue(amount)),
+        fromAddress: toValue(tron.account),
+        fromChain: 'TRON',
+        userId: receiver,
+        toChain: 'D9',
+      }
+      console.info('form', form)
 
-    result += textDecoder.decode(value, { stream: true })
-    return read()
+      const resp = await ofetch<typeof form | { error: string }>('transfer/commit', { baseURL, method: 'POST', body: form })
+      data.value = resp
+      return resp
+    }
+    catch (err: any) {
+      console.info('useCrossChain', 'err', err)
+      if (err instanceof FetchError) {
+        if (err.data?.error)
+          error.value = err.data.error
+        else
+          error.value = err.message
+      }
+      else {
+        error.value = (typeof err === 'object' && 'message' in err)
+          ? err.message ?? err?.toString()
+          : err?.toString()
+      }
+      triggerRef(error)
+    }
+    finally {
+      isLoading.value = false
+      tron.getBalance().then().catch(console.warn)
+    }
+    return false
   }
 
-  return read()
+  return {
+    error,
+    data,
+    isLoading,
+    execute,
+  }
 }

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div rounded-xl bg-gray-1 p-4 dark:bg-gray-8>
+  <div rounded-xl bg-gray-1 p-4>
     <p class="row justify-between">
       Exchange price <span>1:1</span>
     </p>

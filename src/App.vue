@@ -1,27 +1,9 @@
 <script setup lang="ts">
-// https://github.com/vueuse/head
-useHead({
-  title: 'D9 Network Swap',
-  meta: [
-    {
-      name: 'description',
-      content: 'D9 Network',
-    },
-    {
-      name: 'theme-color',
-      content: () => isDark.value ? '#00aba9' : '#ffffff',
-    },
-  ],
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/svg+xml',
-      href: () => preferredDark.value ? '/favicon.webp' : '/favicon.webp',
-    },
-  ],
-})
+preferredDark.value = false
+toggleDark(false)
+
 setupI18n()
-useWalletStore()
+useTronWallet()
 </script>
 
 <template>

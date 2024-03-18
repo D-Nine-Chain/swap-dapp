@@ -6,46 +6,30 @@ import { fromEvent } from '@vueuse/rxjs'
 const toastCtrl = useToast()
 
 const { t } = useI18n()
-const { isTronWeb, approveToSwapContract } = useWalletStore()
 const amount = ref<string>('')
 const receiverAddress = ref<string>('')
 
-const { isLoading, execute, error: approveError } = useAsyncState(
-  () => approveToSwapContract(amount.value),
-  null,
-  { immediate: false, shallow: true },
-)
+const {
+  execute,
+  isLoading,
+  error,
+} = useCrossChain(amount, receiverAddress)
 
-const { execute: submit, isLoading: crosschainLoading, error } = useCrossChain(receiverAddress, computed(() => Number(amount.value)))
-
-watch(approveError, (_error) => {
-  if (!_error)
-    return
-  toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.approval'), life: 3000, detail: t('common.failed', { error: _error }) })
-})
 watch(error, (_error) => {
   if (!_error)
     return
-  const { error } = _error as { error: string, success: boolean }
   toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.transaction'), detail: error, life: 5000 })
 })
 
 async function handleSubmit() {
-  await execute()
-  if (approveError.value)
-    return
-
-  await submit()
-  if (error.value)
-    return
-
-  toastCtrl.add({ severity: 'success', summary: t('swap-form.toast.transaction'), life: 3000, detail: t('swap-form.toast.transaction-successful') })
+  if (await execute())
+    toastCtrl.add({ severity: 'success', summary: t('swap-form.toast.transaction'), life: 3000, detail: t('swap-form.toast.transaction-successful') })
 }
 </script>
 
 <template>
   <form
-    col b-1 rounded-2xl bg-white p-8 shadow-sm dark:b-gray-7 dark:bg-gray-9 sm:p-12
+    col b-1 rounded-2xl bg-white p-8 shadow-sm sm:p-12
   >
     <h1 text-center text-3xl font-bold tracking-wide>
       {{ $t('swap-form.title') }}
@@ -59,18 +43,14 @@ async function handleSubmit() {
     <!-- <SwapFormSwapInfo mt-8 /> -->
 
     <Button
-      v-if="isTronWeb"
       mt-10 w-full text-center
       :disabled="!amount || !receiverAddress"
-      :loading="isLoading || crosschainLoading" @click="handleSubmit"
+      :loading="isLoading" @click="handleSubmit"
     >
       {{ $t('action.submit') }}
     </Button>
 
-    <p v-else mt-1rem text-center text-red font-bold prose>
-      {{ $t('swap-form.unsupported') }}
-    </p>
-    <ProgressBar v-show="isLoading || crosschainLoading" class="bg-[rgba(100,100,100,0.4)]" mode="indeterminate" style="height: 6px" />
+    <ProgressBar v-show="isLoading" class="bg-[rgba(100,100,100,0.4)]" mode="indeterminate" style="height: 6px" />
 
     <div grow />
     <img src="/imgs/big-logo.png" max-w-16rem self-center py-8 sm:hidden>

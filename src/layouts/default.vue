@@ -1,5 +1,5 @@
 <template>
-  <main text="gray-700 dark:gray-200">
+  <main text="gray-700 ">
     <RouterView />
   </main>
 </template>
