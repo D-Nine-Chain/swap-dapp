@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import BigNumber from 'bignumber.js'
 import Skeleton from 'primevue/skeleton'
 
 const { t } = useI18n()
@@ -25,7 +24,12 @@ const amount = defineModel<string>()
         name="sendAmount"
         :placeholder="t('swap-form.placeholder.input-amount')" type="number" w-full bg-transparent text-end text-xl font-bold shadow-none
         step="0.01"
+        :min="20000"
         @change="amount = Number(amount).toFixed(2)"
+        @blur="() => {
+          if (Number(amount) === 0) amount = ''
+          else if (Number(amount) < 20000) amount = '20000'
+        }"
       />
     </div>
 

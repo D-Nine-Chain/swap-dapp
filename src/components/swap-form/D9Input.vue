@@ -15,6 +15,9 @@ const { t } = useI18n()
     <div ml-4 col grow items-end justify-between>
       <p text-sm text-gray-5>
         <!-- Balance: 123,321.00 -->
+        <Transition name="fade">
+          <span v-if="amount">{{ t('swap-form.placeholder.amount-received') }}</span>
+        </Transition>
       </p>
       <InputText
         v-model="amount"
@@ -28,5 +31,13 @@ const { t } = useI18n()
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
 
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

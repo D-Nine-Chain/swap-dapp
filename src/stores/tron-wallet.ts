@@ -1,13 +1,11 @@
-import { node } from '@antfu/eslint-config'
 import BigNumber from 'bignumber.js'
-import tp from 'tp-js-sdk'
 
 const TronUSDTContractAddress = import.meta.env.VITE_APP_TRON_USDT_CONTRACT_ADDRESS
 
 let contractCache = new Map<string, any>()
 
 export const useTronWallet = defineStore('tron-wallet', () => {
-  const tronWeb = shallowRef(window.tronLink.tronWeb ? window.tronLink.tronWeb : undefined)
+  const tronWeb = shallowRef(window.tronLink?.tronWeb ? window.tronLink?.tronWeb : undefined)
   const connected = ref(false)
 
   const account = ref<string>()
