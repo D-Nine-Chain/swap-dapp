@@ -19,6 +19,7 @@ export const useTronWallet = defineStore('tron-wallet', () => {
       contractCache = new Map()
       isLocked.value = false
       account.value = tron.defaultAddress.base58
+      console.info('tron', tron.value, 'account', account.value, 'isLocked', isLocked.value)
     }
   }, { immediate: true })
 
@@ -47,8 +48,10 @@ export const useTronWallet = defineStore('tron-wallet', () => {
             !isTronNode.value && console.warn('not tron node')
             break
           case 'connect':
-            console.info('connect event', data)
+            console.info('connect event', data, window.tronWeb, window.tronLink, window.tronLink.tronWeb)
             connected.value = true
+            if (!tronWeb.value)
+              tronWeb.value = window.tronLink.tronWeb
             break
           case 'disconnect':
             console.info('disconnect event', data)
@@ -72,7 +75,7 @@ export const useTronWallet = defineStore('tron-wallet', () => {
         },
       })
       if (res.code === 200) {
-        tronWeb.value = window.tronLink.tronWebs
+        tronWeb.value = window.tronLink.tronWeb
         return true
       }
       return false
