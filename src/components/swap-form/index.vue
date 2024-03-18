@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
-import { fromEvent } from '@vueuse/rxjs'
 
 const toastCtrl = useToast()
 

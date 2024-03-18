@@ -5,7 +5,6 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Components from 'unplugin-vue-components/vite'
 import { PrimeVueResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
-import VueMacros from 'unplugin-vue-macros/vite'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 
 import VueDevTools from 'vite-plugin-vue-devtools'
@@ -28,12 +27,8 @@ export default defineConfig({
       dts: 'src/typed-router.d.ts',
     }),
 
-    VueMacros({
-      plugins: {
-        vue: Vue({
-          include: [/\.vue$/],
-        }),
-      },
+    Vue({
+      include: [/\.vue$/],
     }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts

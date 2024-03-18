@@ -40,7 +40,6 @@
     "@types/nprogress": "^0.2.3",
     "@unocss/eslint-config": "^0.58.6",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vue-macros/volar": "^0.18.11",
     "@vue/test-utils": "^2.4.5",
     "critters": "^0.0.22",
     "cross-env": "^7.0.3",
