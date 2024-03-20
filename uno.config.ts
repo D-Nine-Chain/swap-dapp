@@ -8,6 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import { presetExtra } from 'unocss-preset-extra'
 
 export default defineConfig({
   shortcuts: [
@@ -42,6 +43,7 @@ export default defineConfig({
         mono: 'JetBrains Mono',
       },
     }),
+    presetExtra(),
   ],
   transformers: [
     transformerDirectives(),

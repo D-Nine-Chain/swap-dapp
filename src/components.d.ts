@@ -19,6 +19,7 @@ declare module 'vue' {
     SwapFormD9Input: typeof import('./components/swap-form/D9Input.vue')['default']
     SwapFormReceiverInput: typeof import('./components/swap-form/ReceiverInput.vue')['default']
     SwapFormSwapInfo: typeof import('./components/swap-form/SwapInfo.vue')['default']
+    SwapFormTips: typeof import('./components/swap-form/Tips.vue')['default']
     SwapFormTronInput: typeof import('./components/swap-form/TronInput.vue')['default']
   }
 }

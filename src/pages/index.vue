@@ -3,7 +3,7 @@ const { connected } = storeToRefs(useTronWallet())
 </script>
 
 <template>
-  <div class="wrapper" min-h-100vh w-100vw flex align-central>
+  <div class="wrapper" min-h-100vh w-100vw flex align-central overflow-hidden>
     <div fixed inset-0 z-0 />
 
     <Connect

@@ -18,5 +18,9 @@ swap-form:
     transaction: Transaction
     transaction-successful: 交易成功!
   unsupported: >-
-    Sorry, currently only TokenPocket APP or browsers with the TronLink extension installed are supported.
-    Please use it in a supported environment.
+    抱歉，目前仅支持TokenPocket APP或安装了TronLink扩展的浏览器。
+    请在受支持的环境中使用它。
+  tips:
+    - 1、单次跨链资产数量最少20000枚Usdt或以上；
+    - 2、Tron向D9转移USDT额外补贴1.5%数额；
+    - 3、D9向Tron转移USDT收取3%的手续费；

@@ -54,6 +54,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2",
     "unocss": "^0.58.6",
+    "unocss-preset-extra": "^0.5.3",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
     "unplugin-vue-router": "^0.8.5",

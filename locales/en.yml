@@ -18,5 +18,9 @@ swap-form:
     transaction: Transaction
     transaction-successful: Transaction successful!
   unsupported: >-
-    抱歉，目前仅支持TokenPocket APP或安装了TronLink扩展的浏览器。
-    请在受支持的环境中使用它。
+    Sorry, currently only TokenPocket APP or browsers with the TronLink extension installed are supported.
+    Please use it in a supported environment.
+  tips:
+    - 1. The minimum number of cross-chain assets in a single transaction is 20,000 Usdt or more;
+    - 2. Tron transfers USDT to D9 for an additional subsidy of 1.5%;
+    - 3. D9 charges a 3% handling fee for transferring USDT to Tron;

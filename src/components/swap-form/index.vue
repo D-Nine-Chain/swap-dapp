@@ -28,9 +28,10 @@ async function handleSubmit() {
 
 <template>
   <form
-    col b-1 rounded-2xl bg-white p-8 shadow-sm sm:p-12
+
+    col b-1 rounded-2xl bg-white p-8 shadow-sm animated animated-fade-in animated-faster sm:p-12
   >
-    <img src="/imgs/big-logo.png" m-auto mb-4 max-w-22rem>
+    <img src="/imgs/big-logo.png" m-auto mb-4 max-w-22rem w-full>
     <!-- <h1 text-center text-3xl font-bold tracking-wide>
       {{ $t('swap-form.title') }}
     </h1> -->
@@ -51,6 +52,8 @@ async function handleSubmit() {
     </Button>
 
     <ProgressBar v-show="isLoading" class="bg-[rgba(100,100,100,0.4)]" mode="indeterminate" style="height: 6px" />
+
+    <SwapFormTips mt-4 />
 
     <div grow />
   </form>

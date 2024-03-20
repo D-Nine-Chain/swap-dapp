@@ -2,6 +2,8 @@
 const amount = defineModel<string>()
 
 const { t } = useI18n()
+
+const calculated = computed(() => Number(amount.value ?? 0) * Number(import.meta.env.VITE_APP_RATE_TRON_TO_D9))
 </script>
 
 <template>
@@ -18,7 +20,7 @@ const { t } = useI18n()
         <span>{{ t('swap-form.placeholder.amount-received') }}</span>
       </p>
       <InputText
-        :value="amount ? amount : 0"
+        :value="calculated"
         readonly name="receiveAmount"
         :placeholder="t('swap-form.placeholder.amount-received')"
         type="number" w-full bg-transparent text-end text-xl font-bold

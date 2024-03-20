@@ -34,8 +34,9 @@ const amount = defineModel<string>()
     </div>
 
     <div
-      class="bottom--51% left-50% translate-x--50%"
-      absolute h-14 w-14 col align-central b-3 b-gray-1 rounded-xl bg-gray-2 shadow-lg
+
+      class="bottom--51% left-50% !translate-x--50%"
+      absolute h-14 w-14 col align-central b-3 b-gray-1 rounded-xl bg-gray-2 shadow-lg animated animated-fade-in
     >
       <svg
         xmlns="http://www.w3.org/2000/svg" rotate="-90deg" text-2xl text-gray-5 width="32" height="32"
