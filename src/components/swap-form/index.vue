@@ -28,7 +28,6 @@ async function handleSubmit() {
 
 <template>
   <form
-
     col b-1 rounded-2xl bg-white p-8 shadow-sm animated animated-fade-in animated-faster sm:p-12
   >
     <img src="/imgs/big-logo.png" m-auto mb-4 max-w-22rem w-full>
