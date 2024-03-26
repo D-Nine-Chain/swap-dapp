@@ -115,6 +115,9 @@ devDependencies:
   unocss:
     specifier: ^0.58.6
     version: 0.58.6(postcss@8.4.36)(rollup@4.13.0)(vite@5.1.6)
+  unocss-preset-extra:
+    specifier: ^0.5.3
+    version: 0.5.3(unocss@0.58.6)
   unplugin-auto-import:
     specifier: ^0.17.5
     version: 0.17.5(@vueuse/core@10.9.0)(rollup@4.13.0)
@@ -7251,6 +7254,14 @@ packages:
   /universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
+    dev: true
+
+  /unocss-preset-extra@0.5.3(unocss@0.58.6):
+    resolution: {integrity: sha512-rRosBmJ3S8/97o/l4J1lc3AJnSGMSD1FgDs4bvUWmrz2OQvPheuZluL8xULEd5MGwHjw4vAwYkue114pnVelzA==}
+    peerDependencies:
+      unocss: '>= 0.31.0 < 1'
+    dependencies:
+      unocss: 0.58.6(postcss@8.4.36)(rollup@4.13.0)(vite@5.1.6)
     dev: true
 
   /unocss@0.58.6(postcss@8.4.36)(rollup@4.13.0)(vite@5.1.6):
