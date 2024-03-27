@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import BigNumber from 'bignumber.js'
+
 const amount = defineModel<string>()
 
 const { t } = useI18n()
 
-const calculated = computed(() => Number(amount.value ?? 0) * Number(import.meta.env.VITE_APP_RATE_TRON_TO_D9))
+const calculated = computed(() => {
+  return new BigNumber(amount.value ?? 0).multipliedBy(new BigNumber(import.meta.env.VITE_APP_RATE_TRON_TO_D9)).toFixed(2)
+})
 </script>
 
 <template>

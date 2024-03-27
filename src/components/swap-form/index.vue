@@ -38,8 +38,8 @@ async function handleSubmit() {
 
     <SwapFormAccountInput mt-10 />
     <SwapFormReceiverInput v-model="receiverAddress" mt-8 />
-    <SwapFormTronInput v-model="amount" mt-8 />
-    <SwapFormD9Input v-model="amount" mt-8 />
+    <SwapFormTronUSDTInput v-model="amount" mt-8 />
+    <SwapFormD9USDTInput v-model="amount" mt-8 />
     <!-- <SwapFormSwapInfo mt-8 /> -->
 
     <Button

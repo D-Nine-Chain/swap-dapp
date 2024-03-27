@@ -16,10 +16,10 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SwapForm: typeof import('./components/swap-form/index.vue')['default']
     SwapFormAccountInput: typeof import('./components/swap-form/AccountInput.vue')['default']
-    SwapFormD9Input: typeof import('./components/swap-form/D9Input.vue')['default']
+    SwapFormD9USDTInput: typeof import('./components/swap-form/D9USDTInput.vue')['default']
     SwapFormReceiverInput: typeof import('./components/swap-form/ReceiverInput.vue')['default']
     SwapFormSwapInfo: typeof import('./components/swap-form/SwapInfo.vue')['default']
     SwapFormTips: typeof import('./components/swap-form/Tips.vue')['default']
-    SwapFormTronInput: typeof import('./components/swap-form/TronInput.vue')['default']
+    SwapFormTronUSDTInput: typeof import('./components/swap-form/TronUSDTInput.vue')['default']
   }
 }
