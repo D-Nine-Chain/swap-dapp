@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
+import BigNumber from 'bignumber.js'
+import { checkAddress } from '@polkadot/util-crypto'
 
 const toastCtrl = useToast()
-
 const { t } = useI18n()
+const { usdtBalance } = storeToRefs(useTronWallet())
 const amount = ref<string>('')
 const receiverAddress = ref<string>('')
 
@@ -17,10 +19,27 @@ const {
 watch(error, (_error) => {
   if (!_error)
     return
-  toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.transaction'), detail: error, life: 5000 })
+  toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.transaction'), detail: _error, life: 5000 })
+  error.value = undefined
 })
 
 async function handleSubmit() {
+  let detail = ''
+  const [addressValid] = checkAddress(receiverAddress.value, 9)
+
+  if (!receiverAddress.value)
+    detail = t('swap-form.receiver-required')
+  else if (!addressValid)
+    detail = t('swap-form.invalid-receiving-address')
+  else if (usdtBalance.value?.lt(new BigNumber(amount.value)))
+    detail = t('swap-form.insufficient-balance')
+  else if (new BigNumber(amount.value).isZero() || new BigNumber(amount.value).isNaN())
+    detail = t('swap-form.pls-input-amount')
+  if (detail) {
+    error.value = detail
+    return
+  }
+
   if (await execute())
     toastCtrl.add({ severity: 'success', summary: t('swap-form.toast.transaction'), life: 3000, detail: t('swap-form.toast.transaction-successful') })
 }
@@ -44,7 +63,6 @@ async function handleSubmit() {
 
     <Button
       mt-10 w-full text-center
-      :disabled="!amount || !receiverAddress"
       :loading="isLoading" @click="handleSubmit"
     >
       {{ $t('action.submit') }}

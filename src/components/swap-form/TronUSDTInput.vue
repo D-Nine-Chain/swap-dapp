@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import BigNumber from 'bignumber.js'
 import Skeleton from 'primevue/skeleton'
 
 const { t } = useI18n()
 const { usdtBalance } = storeToRefs(useTronWallet())
 const amount = defineModel<string>()
+const invalid = computed(() => {
+  return usdtBalance.value?.lt(new BigNumber(amount.value ?? '0'))
+})
+
+const error = computed(() => {
+  return invalid.value ? 'Insufficient balance' : ''
+})
 </script>
 
 <template>
@@ -21,6 +29,8 @@ const amount = defineModel<string>()
       </p>
       <InputText
         v-model="amount"
+        :invalid
+        :error
         name="sendAmount"
         :placeholder="t('swap-form.placeholder.input-amount')" type="number" w-full bg-transparent text-end text-xl font-bold shadow-none
         step="0.01"
@@ -34,7 +44,6 @@ const amount = defineModel<string>()
     </div>
 
     <div
-
       class="bottom--51% left-50% !translate-x--50%"
       absolute h-14 w-14 col align-central b-3 b-gray-1 rounded-xl bg-gray-2 shadow-lg animated animated-fade-in
     >
@@ -59,5 +68,8 @@ const amount = defineModel<string>()
 </template>
 
 <style scoped>
-
+:deep(.p-invalid) {
+  color: red;
+  position: relative;
+}
 </style>

@@ -34,7 +34,11 @@ export const useTronWallet = defineStore('tron-wallet', () => {
       const message = event.data.message
       if (message && message.action) {
         const data = message.data
+        // console.info('message received', message.action, message.data)
         switch (message.action) {
+          case 'setAccount':
+            account.value = data.address
+            break
           case 'accountsChanged':
             const newAddress = data.address
             console.info('accounts changed event', newAddress)

@@ -16,6 +16,7 @@
     "sizecheck": "npx vite-bundle-visualizer"
   },
   "dependencies": {
+    "@polkadot/util-crypto": "^12.6.2",
     "@unhead/vue": "^1.9.1",
     "@unocss/reset": "^0.58.7",
     "@vueuse/core": "^10.9.0",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { account } = useTronWallet()
+const { account } = storeToRefs(useTronWallet())
 const truncated = truncateAddress(account)
 </script>
 
