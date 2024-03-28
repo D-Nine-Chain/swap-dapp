@@ -8,10 +8,6 @@ const amount = defineModel<string>()
 const invalid = computed(() => {
   return usdtBalance.value?.lt(new BigNumber(amount.value ?? '0'))
 })
-
-const error = computed(() => {
-  return invalid.value ? 'Insufficient balance' : ''
-})
 </script>
 
 <template>
@@ -30,7 +26,6 @@ const error = computed(() => {
       <InputText
         v-model="amount"
         :invalid
-        :error
         name="sendAmount"
         :placeholder="t('swap-form.placeholder.input-amount')" type="number" w-full bg-transparent text-end text-xl font-bold shadow-none
         step="0.01"
