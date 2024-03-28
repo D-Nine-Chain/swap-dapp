@@ -19,8 +19,9 @@ swap-form:
     transaction-successful: 交易成功!
   insufficient-balance: 余额不足
   receiver-required: 必须要填写接收地址
-  invalid-receiving-address: 无效的接收地址，请仔细核对
+  invalid-receiving-address: '无效的接收地址，请仔细核对: {address}'
   pls-input-amount: 请输入数量
+  at-least-2000: 数量至少 20000 USDT(Tron)
   unsupported: >-
     抱歉，目前仅支持TokenPocket APP或安装了TronLink扩展的浏览器。
     请在受支持的环境中使用它。

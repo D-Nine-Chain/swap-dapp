@@ -2,7 +2,6 @@
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
 import BigNumber from 'bignumber.js'
-import { checkAddress } from '@polkadot/util-crypto'
 
 const toastCtrl = useToast()
 const { t } = useI18n()
@@ -16,23 +15,30 @@ const {
   error,
 } = useCrossChain(amount, receiverAddress)
 
-watch(error, (_error) => {
+watch(error, (_error: any) => {
   if (!_error)
     return
+  console.warn('failed', _error)
+  if (typeof _error !== 'string') {
+    if (Array.isArray(_error))
+      _error = (_error[0] as any).message
+    else if ('message' in _error)
+      _error = _error.message
+  }
+
   toastCtrl.add({ severity: 'error', summary: t('swap-form.toast.transaction'), detail: _error, life: 5000 })
   error.value = undefined
 })
 
 async function handleSubmit() {
   let detail = ''
-  const [addressValid] = checkAddress(receiverAddress.value, 9)
 
   if (!receiverAddress.value)
     detail = t('swap-form.receiver-required')
-  else if (!addressValid)
-    detail = t('swap-form.invalid-receiving-address')
   else if (usdtBalance.value?.lt(new BigNumber(amount.value)))
     detail = t('swap-form.insufficient-balance')
+  else if (usdtBalance.value?.lt(20000))
+    detail = t('swap-form.at-least-2000')
   else if (new BigNumber(amount.value).isZero() || new BigNumber(amount.value).isNaN())
     detail = t('swap-form.pls-input-amount')
   if (detail) {

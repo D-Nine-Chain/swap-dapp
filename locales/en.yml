@@ -19,8 +19,9 @@ swap-form:
     transaction-successful: Transaction successful!
   insufficient-balance: Insufficient balance
   receiver-required: Receiving address is required
-  invalid-receiving-address: Invalid receiving address
+  invalid-receiving-address: 'Invalid receiving address: {address}'
   pls-input-amount: Please input amount
+  at-least-2000: Amount must be at least 20000
   unsupported: >-
     Sorry, currently only TokenPocket APP or browsers with the TronLink extension installed are supported.
     Please use it in a supported environment.

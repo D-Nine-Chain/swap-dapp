@@ -1,3 +1,4 @@
+import { checkAddress } from '@polkadot/util-crypto'
 import type { MaybeRefOrGetter } from '@vueuse/core'
 import { FetchError, ofetch } from 'ofetch'
 
@@ -7,6 +8,7 @@ export function useCrossChain(
   amount: MaybeRefOrGetter<string>,
   receiverAddress: MaybeRefOrGetter<string>,
 ) {
+  const { t } = useI18n()
   const tron = useTronWallet()
 
   const error = ref<string>()
@@ -21,8 +23,10 @@ export function useCrossChain(
       let receiver = toValue(receiverAddress)
       if (receiver.length === 49 && receiver.startsWith('Dn'))
         receiver = receiver.substring(2)
-      if (receiver.length !== 47)
-        throw new Error(`Invalid address: ${receiver}`)
+
+      const [addressValid] = checkAddress(receiver, 9)
+      if (!addressValid)
+        throw new Error(t('swap-form.invalid-receiving-address', { address: receiver }))
 
       await tron.approveContract(toValue(amount), D9CrossChainContractAddress)
 
