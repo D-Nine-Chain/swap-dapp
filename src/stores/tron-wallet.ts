@@ -1,6 +1,13 @@
 import BigNumber from 'bignumber.js'
+import { ofetch } from 'ofetch'
 
-const TronUSDTContractAddress = import.meta.env.VITE_APP_TRON_USDT_CONTRACT_ADDRESS
+let TronUSDTContractAddress = import.meta.env.VITE_APP_TRON_USDT_CONTRACT_ADDRESS
+const baseURL = import.meta.env.VITE_APP_CROSS_TRANSFER_ENDPOINT
+const { tronTransferContract } = await ofetch<{ tronTransferContract: string }>(`/tron/transfer-contract/address`, {
+  baseURL,
+})
+
+TronUSDTContractAddress = tronTransferContract
 
 let contractCache = new Map<string, any>()
 

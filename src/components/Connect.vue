@@ -1,7 +1,10 @@
 <script setup lang="ts">
 const { connect } = useTronWallet()
 
-const isTronLink = !!window.tronWeb
+const isTronLink = ref(false)
+setTimeout(() => {
+  isTronLink.value = !!window.tronWeb
+}, 100)
 </script>
 
 <template>

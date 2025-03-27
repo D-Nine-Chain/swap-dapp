@@ -33,7 +33,6 @@ export function useCrossChain(
       const txId = await ofetch<string | object>(`transfer/id/next/${receiver}`, {
         baseURL,
       })
-
       const form = {
         transferId: txId,
         toAddress: receiver,
@@ -44,7 +43,6 @@ export function useCrossChain(
         toChain: 'D9',
       }
       console.info('form', form)
-
       const resp = await ofetch<typeof form | { error: string }>('transfer/commit', { baseURL, method: 'POST', body: form })
       data.value = resp
       return resp
