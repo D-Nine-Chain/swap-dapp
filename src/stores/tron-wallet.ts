@@ -1,13 +1,6 @@
 import BigNumber from 'bignumber.js'
-import { ofetch } from 'ofetch'
 
-let TronUSDTContractAddress = import.meta.env.VITE_APP_TRON_USDT_CONTRACT_ADDRESS
-const baseURL = import.meta.env.VITE_APP_CROSS_TRANSFER_ENDPOINT
-const { tronTransferContract } = await ofetch<{ tronTransferContract: string }>(`/tron/transfer-contract/address`, {
-  baseURL,
-})
-
-TronUSDTContractAddress = tronTransferContract
+const TronUSDTContractAddress = import.meta.env.VITE_APP_TRON_USDT_CONTRACT_ADDRESS
 
 let contractCache = new Map<string, any>()
 
@@ -109,7 +102,7 @@ export const useTronWallet = defineStore('tron-wallet', () => {
   async function getBalance() {
     const usdt = await getContract(TronUSDTContractAddress)
     const result = await usdt.balanceOf(account.value).call()
-    // console.info('getBalance', 'result', result)
+    console.info('getBalance', 'result', result)
     const balance = BigNumber(result?.toString() ?? 0).dividedBy(BigNumber(10).pow(6))
     usdtBalance.value = balance
     return balance

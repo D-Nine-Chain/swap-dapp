@@ -2,7 +2,12 @@ import { checkAddress } from '@polkadot/util-crypto'
 import type { MaybeRefOrGetter } from '@vueuse/core'
 import { FetchError, ofetch } from 'ofetch'
 
-const D9CrossChainContractAddress = import.meta.env.VITE_APP_D9_CROSSCHAIN_CONTRACT_ADDRESS
+const baseURL = import.meta.env.VITE_APP_CROSS_TRANSFER_ENDPOINT
+let D9CrossChainContractAddress = import.meta.env.VITE_APP_D9_CROSSCHAIN_CONTRACT_ADDRESS
+const { tronTransferContract } = await ofetch<{ tronTransferContract: string }>(`/tron/transfer-contract/address`, {
+  baseURL,
+})
+D9CrossChainContractAddress = tronTransferContract
 
 export function useCrossChain(
   amount: MaybeRefOrGetter<string>,

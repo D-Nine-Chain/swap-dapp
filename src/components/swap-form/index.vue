@@ -37,8 +37,8 @@ async function handleSubmit() {
     detail = t('swap-form.receiver-required')
   else if (usdtBalance.value?.lt(new BigNumber(amount.value)))
     detail = t('swap-form.insufficient-balance')
-  else if (usdtBalance.value?.lt(20000))
-    detail = t('swap-form.at-least-2000')
+  // else if (usdtBalance.value?.lt(20000))
+  //   detail = t('swap-form.at-least-2000')
   else if (new BigNumber(amount.value).isZero() || new BigNumber(amount.value).isNaN())
     detail = t('swap-form.pls-input-amount')
   if (detail) {
